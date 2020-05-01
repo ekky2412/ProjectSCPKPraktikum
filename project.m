@@ -186,9 +186,18 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function hasil = utama(nama,views,likes,dislikes,comments,data)
-hasil = [1 1];
-
+function hasil = utama(views,likes,dislikes,comments,data,datanama)
+[a b] = size(data);
+bobot = [views likes dislikes comments];
+bobot = bobot./sum(bobot);
+bobot = [bobot(1,1) bobot(1,2) -bobot(1,3) bobot(1,4)];
+for i=1:a
+    S(i)= prod(data(i,:).^bobot,2);
+end
+%masalah disini
+V = S/sum(S);
+tertinggi = find(max(V));
+hasil = [datanama(tertinggi) V(tertinggi)];
 % koding utama
 
 
@@ -201,9 +210,12 @@ likes = str2num(get(handles.edit_likes,'string'));
 dislikes = str2num(get(handles.edit_dislikes,'string'));
 comments = str2num(get(handles.edit_comments,'string'));
 data = readtable(nama,'HeaderLines',1);
-data =[data(:,3) data(:,8) data(:,9) data(:,10) data(:,11)];
-data = table2cell(data);
-hasil = utama(nama,views,likes,dislikes,comments,data);
+datanama = data(:,3);
+data =[data(:,8) data(:,9) data(:,10) data(:,11)];
+data = table2array(data);
+datanama = table2array(datanama);
+%data = cell2mat(data);
+hasil = utama(views,likes,dislikes,comments,data,datanama);
 set(handles.outputjudul,'string',hasil(1,1));
 set(handles.outputhasil,'string',hasil(1,2));
 
