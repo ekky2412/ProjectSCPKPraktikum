@@ -22,7 +22,7 @@ function varargout = project(varargin)
 
 % Edit the above text to modify the response to help project
 
-% Last Modified by GUIDE v2.5 30-Apr-2020 14:24:27
+% Last Modified by GUIDE v2.5 30-Apr-2020 14:52:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,18 +73,18 @@ varargout{1} = handles.output;
 
 
 
-function edit_view_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_view (see GCBO)
+function edit_views_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_views (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit_view as text
-%        str2double(get(hObject,'String')) returns contents of edit_view as a double
+% Hints: get(hObject,'String') returns contents of edit_views as text
+%        str2double(get(hObject,'String')) returns contents of edit_views as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_view_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_view (see GCBO)
+function edit_views_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_views (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -186,14 +186,23 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function hasil = utama(nama,
-
+function hasil = utama(nama,views,likes,dislikes,comments,data)
+% koding utama
 
 
 
 % --- Executes on button press in submit.
 function submit_Callback(hObject, eventdata, handles)
+nama =  get(handles.edit_judul,'string');
+views = str2num(get(handles.edit_views,'string'));
+likes = str2num(get(handles.edit_likes,'string'));
+dislikes = str2num(get(handles.edit_dislikes,'string'));
+comments = str2num(get(handles.edit_comments,'string'));
+data = readtable(nama,'HeaderLines',1);
+data = [data(:,3) data(:,8) data(:,9) data(:,10) data(:,11)];
+
+
+
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-

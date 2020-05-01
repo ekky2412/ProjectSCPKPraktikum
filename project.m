@@ -22,7 +22,7 @@ function varargout = project(varargin)
 
 % Edit the above text to modify the response to help project
 
-% Last Modified by GUIDE v2.5 30-Apr-2020 14:52:23
+% Last Modified by GUIDE v2.5 01-May-2020 15:51:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -96,18 +96,18 @@ end
 
 
 
-function edit_like_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_like (see GCBO)
+function edit_likes_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_likes (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit_like as text
-%        str2double(get(hObject,'String')) returns contents of edit_like as a double
+% Hints: get(hObject,'String') returns contents of edit_likes as text
+%        str2double(get(hObject,'String')) returns contents of edit_likes as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_like_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_like (see GCBO)
+function edit_likes_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_likes (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -186,18 +186,26 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function hasil = utama(nama,views,likes,dislikes,comments)
+function hasil = utama(nama,views,likes,dislikes,comments,data)
+hasil = [1 1];
+
 % koding utama
 
 
 
 % --- Executes on button press in submit.
 function submit_Callback(hObject, eventdata, handles)
-nama =  get(handles.edit_judul,'string');
+nama =  get(handles.edit_file,'string');
 views = str2num(get(handles.edit_views,'string'));
 likes = str2num(get(handles.edit_likes,'string'));
 dislikes = str2num(get(handles.edit_dislikes,'string'));
 comments = str2num(get(handles.edit_comments,'string'));
+data = readtable(nama,'HeaderLines',1);
+data =[data(:,3) data(:,8) data(:,9) data(:,10) data(:,11)];
+data = table2cell(data);
+hasil = utama(nama,views,likes,dislikes,comments,data);
+set(handles.outputjudul,'string',hasil(1,1));
+set(handles.outputhasil,'string',hasil(1,2));
 
 
 % hObject    handle to submit (see GCBO)
