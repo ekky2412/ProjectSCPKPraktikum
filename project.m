@@ -194,10 +194,9 @@ bobot = [bobot(1,1) bobot(1,2) -bobot(1,3) bobot(1,4)];
 for i=1:a
     S(i)= prod(data(i,:).^bobot,2);
 end
-%masalah disini
 V = S/sum(S);
-tertinggi = find(max(V));
-hasil = [datanama(tertinggi) V(tertinggi)];
+[maks index] = max(V);
+hasil = [datanama(index) V(index)];
 % koding utama
 
 
@@ -212,6 +211,7 @@ comments = str2num(get(handles.edit_comments,'string'));
 data = readtable(nama,'HeaderLines',1);
 datanama = data(:,3);
 data =[data(:,8) data(:,9) data(:,10) data(:,11)];
+data = data(1:100,:);
 data = table2array(data);
 datanama = table2array(datanama);
 %data = cell2mat(data);
