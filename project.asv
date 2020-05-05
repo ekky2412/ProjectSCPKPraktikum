@@ -197,10 +197,13 @@ end
 V = S/sum(S);
 
 [maks index] = maxk(V,5);
+for i=1:2
+    for j=1:5
+        hasil = hasil
 datanama = datanama(index);
-maks = transpose(num2cell(maks));
+%maks = transpose(maks);
 %datanama = tranpose(datanama);
-hasil = [datanama maks];
+hasil = transpose([datanama;maks]);
 % koding utama
 
 
@@ -221,7 +224,9 @@ data = table2array(data);
 datanama = table2array(datanama);
 %data = cell2mat(data);
 hasil = utama(views,likes,dislikes,comments,data,datanama);
-set(handles.uitable1,'data',hasil);
+hasil = num2cell(hasil);
+set(handles.uitable1,'string',hasil);
+
 
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
