@@ -22,7 +22,7 @@ function varargout = project(varargin)
 
 % Edit the above text to modify the response to help project
 
-% Last Modified by GUIDE v2.5 05-May-2020 22:04:26
+% Last Modified by GUIDE v2.5 14-May-2020 06:43:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -222,6 +222,8 @@ datanama = table2array(datanama);
 %data = cell2mat(data);
 hasil = utama(views,likes,dislikes,comments,data,datanama);
 set(handles.uitable1,'data',hasil);
+set(handles.hasilVideo,'String',hasil(1,1));
+set(handles.hasilVektor,'String',hasil(1,2));
 
 % hObject    handle to submit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
